@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <!--<a class="navbar-brand" href="/">{{tempnombre}}</a>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" href="#">CPS</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button type="button" class="btn btn-success">Cliente</button>
+      </form>
+    </div>
+  </nav>
+  <!--Agregar formulario para registro de usuario-->
+  <div class="container">
+    <div class="row main">
+        <div class="main-login main-center">
+        <h5>Ingresar Datos</h5>
+            <form #frmOrder="ngForm" (ngSubmit)="sendOrder(frmOrder)">
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <label for="country" class="cols-sm-2 control-label">País Origen:</label>
+                            <input type="text" class="form-control" name="paisOrigen" [(ngModel)]="countryDefault" required placeholder="País origen" readonly/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="region" class="cols-sm-2 control-label">Region</label>
+                    <div class="cols-sm-10">
+                          <select class="form-control" name="codeRegion" [(ngModel)]="regionService.selectRegion.codeRegion" (ngModelChange)="onChangeCountryDes($event)">
+                              <option [ngValue]="null" disabled >Seleccionar Region</option>
+                              <option *ngFor="let region of regionService.regiones"  [ngValue]="region">
+                                  {{region.description}}
+                              </option>
+                          </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="cols-sm-2 control-label">Pais Destino</label>
+                    <div class="cols-sm-10">
+                        <select class="form-control" name="codCountry" [(ngModel)]="countryService.selectCountry.codCountry" (ngModelChange)="onchangeCountry($event)" >
+                            <option [ngValue]="null" disabled >Seleccionar Pais</option>
+                            <option *ngFor="let country of countryService.countrys"  [ngValue]="country">
+                                {{country.description}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="weight">Peso:</label>
+                        <input type="text" name="weight" class="form-control" [(ngModel)]="orderService.selectOrder.weight">
+                    </div>
+                    <div class="col">
+                        <label for="width">ancho:</label>
+                        <input type="text" name="width" class="form-control" [(ngModel)]="orderService.selectOrder.width">
+                    </div>
+                    <div class="col">
+                        <label for="tall">Alto</label>
+                        <input type="text" name="tall" class="form-control" [(ngModel)]="orderService.selectOrder.tall">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="longg">Largo</label>
+                        <input type="text" name="longg" class="form-control" [(ngModel)]="orderService.selectOrder.longg">
+                    </div>
+                    <div class="col">
+                        <label for="rate">Tarifa</label>
+                        <input type="text" name="rate" class="form-control" [(ngModel)]="rate" [(ngModel)]="orderService.selectOrder.rate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="button" class="btn btn-info" value="Cotizar" (click)="getcotiza(frmOrder)">
+                    </div>
+                    <div class="col">
+                        <label for="quotation">Estimado</label>
+                        <input type="text" name="quotation" class="form-control" [(ngModel)]="orderService.selectOrder.quotation" >
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <!--para agregar boton-->
+                	<div class="form-group ">
+                        <input type="submit" id="button" class="btn btn-success btn-lg btn-block login-button" value="Realizar envio" >
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
